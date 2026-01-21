@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setup Instructions - Crypto Mining DApp</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 { color: #667eea; }
+        h2 { color: #764ba2; margin-top: 30px; }
+        code {
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        pre {
+            background: #1e1e1e;
+            color: #0f0;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .step {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f9f9f9;
+            border-left: 4px solid #667eea;
+        }
+        .warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .success {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Crypto Mining DApp Setup Instructions</h1>
+        
+        <div class="warning">
+            <strong>⚠️ Important:</strong> Follow these steps in order to successfully deploy and run the DApp.
+        </div>
+
+        <h2>Step 1: Install Dependencies</h2>
+        <div class="step">
+            <p>Make sure you have Node.js installed (v16 or higher), then run:</p>
+            <pre>npm install</pre>
+        </div>
+
+        <h2>Step 2: Configure Environment</h2>
+        <div class="step">
+            <p>Copy the example environment file:</p>
+            <pre>cp .env.example .env</pre>
+            <p>Edit <code>.env</code> and add your configuration:</p>
+            <ul>
+                <li>Private key from your wallet (for deployment)</li>
+                <li>RPC URL for your chosen network</li>
+            </ul>
+        </div>
+
+        <h2>Step 3: Get Testnet ETH</h2>
+        <div class="step">
+            <p>Get free testnet ETH from these faucets:</p>
+            <ul>
+                <li><a href="https://sepoliafaucet.com/" target="_blank">Sepolia Faucet</a></li>
+                <li><a href="https://goerlifaucet.com/" target="_blank">Goerli Faucet</a></li>
+            </ul>
+        </div>
+
+        <h2>Step 4: Compile Contracts</h2>
+        <div class="step">
+            <pre>npm run compile</pre>
+            <p>This will compile the Solidity smart contracts.</p>
+        </div>
+
+        <h2>Step 5: Run Tests</h2>
+        <div class="step">
+            <pre>npm test</pre>
+            <p>Ensure all tests pass before deployment.</p>
+        </div>
+
+        <h2>Step 6: Deploy to Testnet</h2>
+        <div class="step">
+            <pre>npm run deploy:testnet</pre>
+            <p>This will deploy the contracts to Sepolia testnet.</p>
+            <p>Save the contract addresses from the output!</p>
+        </div>
+
+        <h2>Step 7: Update Frontend Configuration</h2>
+        <div class="step">
+            <p>Edit <code>frontend/app.js</code> and update:</p>
+            <pre>const MINING_CONTRACT_ADDRESS = "0x...";
+const USDT_CONTRACT_ADDRESS = "0x...";</pre>
+        </div>
+
+        <h2>Step 8: Start the DApp</h2>
+        <div class="step">
+            <p>In one terminal, start the frontend:</p>
+            <pre>npm run start:frontend</pre>
+            <p>In another terminal, start the backend:</p>
+            <pre>npm run start:backend</pre>
+            <p>Visit <code>http://localhost:8080</code> in your browser.</p>
+        </div>
+
+        <div class="success">
+            <strong>✅ Success!</strong> Your Crypto Mining DApp should now be running!
+        </div>
+
+        <h2>Next Steps</h2>
+        <ul>
+            <li>Connect MetaMask to Sepolia testnet</li>
+            <li>Start mining to earn USDT rewards</li>
+            <li>Monitor your statistics</li>
+            <li>Read the full documentation in MINING_GUIDE.md</li>
+        </ul>
+
+        <h2>Need Help?</h2>
+        <p>Check the following resources:</p>
+        <ul>
+            <li><a href="MINING_GUIDE.md">Mining Guide</a> - How to use the DApp</li>
+            <li><a href="DEPLOYMENT.md">Deployment Guide</a> - Detailed deployment instructions</li>
+            <li><a href="SECURITY.md">Security Policy</a> - Security best practices</li>
+        </ul>
+    </div>
+</body>
+</html>
