@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import './App.css';
-import { CONTRACT_ABI, CONTRACT_ADDRESS, NETWORK_CONFIG } from './config';
+import { CONTRACT_ABI, CONTRACT_ADDRESS } from './config';
 
 function App() {
   const [account, setAccount] = useState(null);
