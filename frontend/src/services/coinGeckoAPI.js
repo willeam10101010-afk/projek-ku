@@ -1,20 +1,19 @@
 import axios from 'axios';
 
-const COINGECKO_API_BASE_URL = 'https://api.coingecko.com/api/v3';
+// Use backend proxy server to avoid CORS issues
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
 // Fetch top cryptocurrencies by market cap
 export const getTopCryptocurrencies = async (limit = 10) => {
   try {
     const response = await axios.get(
-      `${COINGECKO_API_BASE_URL}/coins/markets`,
+      `${API_BASE_URL}/api/crypto/markets`,
       {
         params: {
           vs_currency: 'usd',
           order: 'market_cap_desc',
           per_page: limit,
-          page: 1,
-          sparkline: false,
-          price_change_percentage: '24h'
+          page: 1
         }
       }
     );
@@ -29,7 +28,7 @@ export const getTopCryptocurrencies = async (limit = 10) => {
 export const searchCryptocurrencies = async (query) => {
   try {
     const response = await axios.get(
-      `${COINGECKO_API_BASE_URL}/search`,
+      `${API_BASE_URL}/api/crypto/search`,
       {
         params: {
           query: query
@@ -42,3 +41,4 @@ export const searchCryptocurrencies = async (query) => {
     throw error;
   }
 };
+
