@@ -73,10 +73,14 @@ Simply open `index.html` in your web browser. Note: Some features may not work d
 
 ## Technology Stack
 
-- **Ethers.js v5.7**: Modern Ethereum library for wallet interaction
+- **Ethers.js v5.7.2**: Modern Ethereum library for wallet interaction (included locally)
 - **HTML5/CSS3**: Frontend structure and styling
 - **Vanilla JavaScript**: ES6+ modules for clean code organization
 - **MetaMask**: Primary wallet provider
+
+## Files Included
+
+- `ethers.min.js`: Local copy of Ethers.js library (ESM module)
 
 ## Security Notes
 
@@ -108,6 +112,7 @@ projek-ku/
 ├── index.html          # Main HTML file
 ├── styles.css          # Styling
 ├── app.js              # JavaScript logic and wallet integration
+├── ethers.min.js       # Ethers.js library (local copy)
 ├── package.json        # Project dependencies
 ├── .gitignore          # Git ignore file
 └── README.md           # This file
@@ -115,7 +120,10 @@ projek-ku/
 
 ## Development
 
-The DApp uses ES6 modules and imports Ethers.js from a CDN, so no build step is required. Simply edit the files and refresh your browser.
+The DApp uses ES6 modules and includes Ethers.js locally, so no build step is required. Simply edit the files and refresh your browser.
+
+### Note on Ethers.js
+This project includes a local copy of Ethers.js (ethers.min.js) for better compatibility and offline development. The library is imported as an ES module in app.js.
 
 ## Troubleshooting
 

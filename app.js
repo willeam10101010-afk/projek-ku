@@ -1,5 +1,5 @@
-// Import ethers from CDN
-import { ethers } from 'https://cdn.ethers.io/lib/ethers-5.7.esm.min.js';
+// Import ethers from local file
+import { ethers } from './ethers.min.js';
 
 class WalletConnection {
     constructor() {
