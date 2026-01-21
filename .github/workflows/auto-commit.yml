@@ -1,0 +1,28 @@
+name: Auto Commit Workflow
+
+on:
+  push:
+    branches:
+      - auto-commit-feature
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  auto-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Update Content
+        run: |
+          echo 'Menambahkan file otomatis' > auto_file.txt
+          echo "File ini ditambahkan oleh bot pada $(date)" >> auto_file.txt
+
+      - name: Commit files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Auto commit: Perubahan file otomatis dilakukan oleh bot"
+          git push
