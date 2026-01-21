@@ -1,6 +1,11 @@
 // Contract addresses (update after deployment)
-const MINING_CONTRACT_ADDRESS = "YOUR_MINING_CONTRACT_ADDRESS";
-const USDT_CONTRACT_ADDRESS = "YOUR_USDT_CONTRACT_ADDRESS";
+const MINING_CONTRACT_ADDRESS = "";  // Set after deployment
+const USDT_CONTRACT_ADDRESS = "";     // Set after deployment
+
+// Validate addresses on load
+if (!MINING_CONTRACT_ADDRESS || !USDT_CONTRACT_ADDRESS) {
+    console.warn('⚠️ Contract addresses not set. Please update frontend/app.js after deployment.');
+}
 
 // Contract ABIs (simplified for frontend)
 const MINING_ABI = [
@@ -53,6 +58,12 @@ async function connectWallet() {
             return;
         }
 
+        // Check if contract addresses are set
+        if (!MINING_CONTRACT_ADDRESS || !USDT_CONTRACT_ADDRESS) {
+            alert('Contract addresses not configured. Please update frontend/app.js with deployed contract addresses.');
+            return;
+        }
+
         // Request account access
         const accounts = await window.ethereum.request({ 
             method: 'eth_requestAccounts' 
@@ -60,9 +71,9 @@ async function connectWallet() {
         
         userAddress = accounts[0];
         
-        // Initialize ethers
-        provider = new ethers.providers.Web3Provider(window.ethereum);
-        signer = provider.getSigner();
+        // Initialize ethers (v6 syntax)
+        provider = new ethers.BrowserProvider(window.ethereum);
+        signer = await provider.getSigner();
         
         // Initialize contracts
         miningContract = new ethers.Contract(MINING_CONTRACT_ADDRESS, MINING_ABI, signer);
@@ -95,16 +106,16 @@ async function loadStats() {
     try {
         // Get USDT balance
         const balance = await usdtContract.balanceOf(userAddress);
-        usdtBalanceEl.textContent = ethers.utils.formatUnits(balance, 6);
+        usdtBalanceEl.textContent = ethers.formatUnits(balance, 6);
         
         // Get miner stats
         const stats = await miningContract.getMinerStats(userAddress);
-        totalMinedEl.textContent = ethers.utils.formatUnits(stats[0], 6);
+        totalMinedEl.textContent = ethers.formatUnits(stats[0], 6);
         successfulMinesEl.textContent = stats[2].toString();
         
         // Get reward amount
         const reward = await miningContract.rewardAmount();
-        rewardAmountEl.textContent = ethers.utils.formatUnits(reward, 6);
+        rewardAmountEl.textContent = ethers.formatUnits(reward, 6);
     } catch (error) {
         console.error('Error loading stats:', error);
         addLog('Error loading stats: ' + error.message, 'error');
@@ -158,12 +169,12 @@ async function mine() {
         let isValid = false;
         
         while (!isValid && isMining && attempts < 100000) {
-            nonce = ethers.utils.randomBytes(32);
+            nonce = ethers.randomBytes(32);
             const timestamp = Math.floor(Date.now() / 1000);
             
-            // Calculate hash (same as contract)
-            hash = ethers.utils.keccak256(
-                ethers.utils.defaultAbiCoder.encode(
+            // Calculate hash (same as contract - using abi.encode)
+            hash = ethers.keccak256(
+                ethers.AbiCoder.defaultAbiCoder().encode(
                     ['address', 'bytes32', 'uint256'],
                     [userAddress, nonce, timestamp]
                 )

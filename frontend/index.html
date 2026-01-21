@@ -259,7 +259,10 @@
         </div>
     </div>
 
-    <script src="https://cdn.ethers.io/lib/ethers-5.7.2.umd.min.js"></script>
-    <script src="app.js"></script>
+    <script type="module">
+        import { ethers } from "https://cdn.jsdelivr.net/npm/ethers@6.9.0/+esm";
+        window.ethers = ethers;
+    </script>
+    <script type="module" src="app.js"></script>
 </body>
 </html>

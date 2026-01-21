@@ -78,7 +78,7 @@ contract CryptoMining is Ownable, ReentrancyGuard {
         require(!usedNonces[nonce], "Nonce already used");
         
         // Verify proof of work
-        bytes32 hash = keccak256(abi.encodePacked(msg.sender, nonce, block.timestamp));
+        bytes32 hash = keccak256(abi.encode(msg.sender, nonce, block.timestamp));
         require(checkDifficulty(hash), "Invalid proof of work");
         
         // Mark nonce as used
@@ -115,13 +115,12 @@ contract CryptoMining is Ownable, ReentrancyGuard {
      */
     function checkDifficulty(bytes32 hash) public view returns (bool valid) {
         uint256 difficulty = miningDifficulty;
-        uint256 target = 0;
         
-        for (uint256 i = 0; i < difficulty; i++) {
-            target = target | (uint256(0xFF) << (248 - i * 8));
-        }
+        // Create a target with leading zeros based on difficulty
+        // Higher difficulty = more leading zero bytes required
+        uint256 target = type(uint256).max >> (difficulty * 8);
         
-        return uint256(hash) < (type(uint256).max - target);
+        return uint256(hash) <= target;
     }
     
     /**

@@ -9,7 +9,7 @@ describe("CryptoMining", function () {
   let miner2;
 
   const REWARD_AMOUNT = ethers.parseUnits("10", 6); // 10 USDT
-  const MINING_DIFFICULTY = 4;
+  const MINING_DIFFICULTY = 2; // Lower difficulty for faster tests
   const MIN_BLOCK_TIME = 30;
 
   beforeEach(async function () {
@@ -152,10 +152,20 @@ describe("CryptoMining", function () {
 
   describe("Difficulty Check", function () {
     it("Should validate hash difficulty correctly", async function () {
-      // Test with a hash that should pass low difficulty
-      const testHash = "0x0000000000000000000000000000000000000000000000000000000000000001";
-      const isValid = await miningContract.checkDifficulty(testHash);
-      expect(isValid).to.be.true;
+      // Test with different hash values
+      // Difficulty 2 means hash must be <= max >> 16
+      const difficulty = await miningContract.miningDifficulty();
+      expect(difficulty).to.equal(2);
+      
+      // A hash with leading zeros should pass
+      const lowHash = "0x0000000000000000000000000000000000000000000000000000000000000001";
+      const isValidLow = await miningContract.checkDifficulty(lowHash);
+      expect(isValidLow).to.be.true;
+      
+      // A hash with high value should fail
+      const highHash = "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF";
+      const isValidHigh = await miningContract.checkDifficulty(highHash);
+      expect(isValidHigh).to.be.false;
     });
   });
 
