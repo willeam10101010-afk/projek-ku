@@ -26,7 +26,7 @@ const CryptoMonitor = () => {
       setFilteredCryptos(data);
       setLastUpdate(new Date());
       setLoading(false);
-    } catch (err) {
+    } catch {
       setError('Failed to fetch cryptocurrency data. Please try again later.');
       setLoading(false);
     }
