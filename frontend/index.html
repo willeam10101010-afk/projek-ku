@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Mining DApp - Earn USDT</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .wallet-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .wallet-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .wallet-address {
+            font-family: monospace;
+            background: #f0f0f0;
+            padding: 10px 15px;
+            border-radius: 8px;
+            word-break: break-all;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .mining-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        .stat-card .value {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .mining-controls {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .mining-status {
+            background: #f0f0f0;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .mining-status h3 {
+            margin-bottom: 10px;
+            color: #667eea;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .log {
+            background: #1e1e1e;
+            color: #0f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            max-height: 200px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+
+        .log-entry {
+            margin: 5px 0;
+        }
+
+        .success {
+            color: #0f0;
+        }
+
+        .error {
+            color: #f00;
+        }
+
+        .info {
+            color: #0ff;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .mining-active {
+            animation: pulse 2s infinite;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⛏️ Crypto Mining DApp</h1>
+            <p>Mine cryptocurrency and earn USDT tokens on Ethereum</p>
+        </div>
+
+        <div class="wallet-section">
+            <h2>Wallet Connection</h2>
+            <div class="wallet-info">
+                <div id="walletStatus">
+                    <p>Not connected</p>
+                </div>
+                <button id="connectWalletBtn" class="btn">Connect MetaMask</button>
+            </div>
+        </div>
+
+        <div class="mining-section" id="miningSection" style="display: none;">
+            <h2>Mining Dashboard</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Your USDT Balance</h3>
+                    <div class="value" id="usdtBalance">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Mined</h3>
+                    <div class="value" id="totalMined">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Successful Mines</h3>
+                    <div class="value" id="successfulMines">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Reward per Mine</h3>
+                    <div class="value" id="rewardAmount">10</div>
+                </div>
+            </div>
+
+            <div class="mining-controls">
+                <button id="startMiningBtn" class="btn">Start Mining</button>
+                <button id="stopMiningBtn" class="btn" style="display: none;">Stop Mining</button>
+            </div>
+
+            <div class="mining-status">
+                <h3>Mining Status</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0%;">
+                        <span id="progressText">Ready</span>
+                    </div>
+                </div>
+                <p id="statusText">Click "Start Mining" to begin</p>
+            </div>
+
+            <div class="log" id="miningLog">
+                <div class="log-entry info">Mining log will appear here...</div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { ethers } from "https://cdn.jsdelivr.net/npm/ethers@6.9.0/+esm";
+        window.ethers = ethers;
+    </script>
+    <script type="module" src="app.js"></script>
+</body>
+</html>
