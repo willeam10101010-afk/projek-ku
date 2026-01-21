@@ -1,0 +1,22 @@
+{
+  "name": "ethereum-wallet-dapp",
+  "version": "1.0.0",
+  "description": "Ethereum Wallet DApp with Web3 integration",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "npx http-server -p 8080 -o"
+  },
+  "keywords": [
+    "ethereum",
+    "web3",
+    "dapp",
+    "wallet",
+    "metamask"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
