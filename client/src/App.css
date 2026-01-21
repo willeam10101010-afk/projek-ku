@@ -1,0 +1,96 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.App {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+}
+
+.App-header {
+  text-align: center;
+  padding: 40px 20px 20px;
+  color: white;
+}
+
+.App-header h1 {
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.subtitle {
+  font-size: 18px;
+  opacity: 0.9;
+  font-weight: 300;
+}
+
+.connect-prompt {
+  text-align: center;
+  padding: 60px 20px;
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.contract-warning {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #fff3cd;
+  border-radius: 12px;
+  border-left: 4px solid #ffc107;
+  text-align: center;
+}
+
+.contract-warning p {
+  margin: 10px 0;
+  color: #856404;
+  font-size: 16px;
+}
+
+.contract-warning .small {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.contract-warning code {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+}
+
+.App-footer {
+  text-align: center;
+  padding: 40px 20px;
+  color: white;
+  opacity: 0.8;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .App-header h1 {
+    font-size: 32px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+  }
+
+  .App {
+    padding: 10px;
+  }
+}
