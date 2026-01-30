@@ -74,4 +74,4 @@ export const CONTRACT_ABI = [
 // Update this address after deploying the contract
 // For local testing: Deploy contract and paste the address here
 // For testnet/mainnet: Paste the deployed contract address
-export const CONTRACT_ADDRESS = "0x0000000000000000000000000000000000000000"; // Update after deployment
+export const CONTRACT_ADDRESS = ""; // Update after deployment
