@@ -16,8 +16,10 @@ function App() {
 
   // Initialize contract and check for existing connection
   useEffect(() => {
-    checkWalletConnection();
-    setupEventListeners();
+    if (typeof window !== 'undefined' && window.ethereum) {
+      checkWalletConnection();
+      setupEventListeners();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
