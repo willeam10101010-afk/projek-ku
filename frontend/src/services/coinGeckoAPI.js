@@ -23,22 +23,3 @@ export const getTopCryptocurrencies = async (limit = 10) => {
     throw error;
   }
 };
-
-// Search cryptocurrencies by name or symbol
-export const searchCryptocurrencies = async (query) => {
-  try {
-    const response = await axios.get(
-      `${API_BASE_URL}/api/crypto/search`,
-      {
-        params: {
-          query: query
-        }
-      }
-    );
-    return response.data.coins;
-  } catch (error) {
-    console.error('Error searching cryptocurrency:', error);
-    throw error;
-  }
-};
-
