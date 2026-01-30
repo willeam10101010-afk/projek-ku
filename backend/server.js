@@ -7,9 +7,18 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware
+const isProduction = process.env.NODE_ENV === 'production';
+const allowedOrigins = process.env.ALLOWED_ORIGINS
+    ? process.env.ALLOWED_ORIGINS.split(',').map(origin => origin.trim()).filter(Boolean)
+    : [];
+
+if (isProduction && allowedOrigins.length === 0) {
+    console.error('CORS configuration error: ALLOWED_ORIGINS must be set with at least one origin in production.');
+}
+
 const corsOptions = {
-    origin: process.env.NODE_ENV === 'production' 
-        ? process.env.ALLOWED_ORIGINS?.split(',') || []
+    origin: isProduction
+        ? allowedOrigins
         : '*',
     optionsSuccessStatus: 200
 };
