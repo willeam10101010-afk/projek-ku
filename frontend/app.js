@@ -208,7 +208,7 @@ async function mine() {
         progressFill.style.width = '90%';
         progressText.textContent = 'Confirming...';
         
-        const receipt = await tx.wait();
+        await tx.wait();
         
         progressFill.style.width = '100%';
         progressText.textContent = 'Success!';
