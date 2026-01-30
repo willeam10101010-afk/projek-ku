@@ -17,7 +17,7 @@ async function main() {
 
   // Deploy CryptoMining
   console.log("\n2. Deploying CryptoMining...");
-  const miningDifficulty = 4; // Number of leading zeros required
+  const miningDifficulty = 4; // Mining difficulty parameter (see CryptoMining contract for how this is applied)
   const rewardAmount = hre.ethers.parseUnits("10", 6); // 10 USDT (6 decimals)
   const minBlockTime = 30; // 30 seconds between mining attempts
 
