@@ -51,7 +51,7 @@ contract CryptoMining is Ownable, ReentrancyGuard {
         uint256 _minBlockTime
     ) Ownable(msg.sender) {
         require(_usdtToken != address(0), "Invalid token address");
-        require(_miningDifficulty > 0 && _miningDifficulty <= 10, "Invalid difficulty");
+        require(_miningDifficulty > 0 && _miningDifficulty <= 6, "Invalid difficulty");
         require(_rewardAmount > 0, "Invalid reward amount");
         
         usdtToken = IERC20(_usdtToken);
