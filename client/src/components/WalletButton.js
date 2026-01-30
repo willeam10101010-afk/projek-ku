@@ -7,7 +7,16 @@ const WalletButton = ({ account, onConnect, balance }) => {
   };
 
   const formatBalance = (bal) => {
-    return parseFloat(bal).toFixed(4);
+    if (bal === null || bal === undefined) {
+      return '0.0000';
+    }
+
+    const num = Number(bal);
+    if (!Number.isFinite(num)) {
+      return '0.0000';
+    }
+
+    return num.toFixed(4);
   };
 
   return (
