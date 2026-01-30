@@ -20,9 +20,29 @@ contract MessageStorage {
      * @dev Store a new message
      * @param newMessage The message to store
      */
+    function _utf8CharLength(string memory s) internal pure returns (uint256) {
+        bytes memory b = bytes(s);
+        uint256 length = 0;
+        uint256 i = 0;
+        while (i < b.length) {
+            uint8 c = uint8(b[i]);
+            if (c < 0x80) {
+                i += 1;
+            } else if (c < 0xE0) {
+                i += 2;
+            } else if (c < 0xF0) {
+                i += 3;
+            } else {
+                i += 4;
+            }
+            length++;
+        }
+        return length;
+    }
+    
     function setMessage(string memory newMessage) public {
         require(bytes(newMessage).length > 0, "Message cannot be empty");
-        require(bytes(newMessage).length <= 280, "Message too long (max 280 characters)");
+        require(_utf8CharLength(newMessage) <= 280, "Message too long (max 280 characters)");
         message = newMessage;
         emit MessageUpdated(newMessage, msg.sender);
     }
