@@ -9,7 +9,7 @@
 
 ### Step 1: Clone and Install
 ```bash
-git clone https://github.com/willeam10101010-afk/projek-ku.git
+git clone https://github.com/<your-github-username>/projek-ku.git
 cd projek-ku
 npm install
 ```
