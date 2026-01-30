@@ -162,7 +162,7 @@ nano .env.production
 Add:
 
 ```env
-VITE_API_URL=https://your-domain.com/api
+VITE_API_URL=https://your-domain.com
 ```
 
 Rebuild the frontend:
