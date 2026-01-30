@@ -78,7 +78,7 @@ contract CryptoMining is Ownable, ReentrancyGuard {
         require(!usedNonces[nonce], "Nonce already used");
         
         // Verify proof of work
-        bytes32 hash = keccak256(abi.encode(msg.sender, nonce, block.timestamp));
+        bytes32 hash = keccak256(abi.encode(msg.sender, nonce));
         require(checkDifficulty(hash), "Invalid proof of work");
         
         // Mark nonce as used
