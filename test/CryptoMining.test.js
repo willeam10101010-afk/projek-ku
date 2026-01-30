@@ -111,7 +111,7 @@ describe("CryptoMining", function () {
         await miningContract.connect(miner1).mine(nonce);
         const balanceAfter = await usdtToken.balanceOf(miner1.address);
 
-        expect(balanceAfter - balanceBefore).to.equal(REWARD_AMOUNT);
+        expect((balanceAfter - balanceBefore).toString()).to.equal(REWARD_AMOUNT.toString());
 
         const [totalMined, , successfulMines] = await miningContract.getMinerStats(miner1.address);
         expect(totalMined).to.equal(REWARD_AMOUNT);
